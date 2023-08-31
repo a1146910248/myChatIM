@@ -1,10 +1,16 @@
 package routers
 
 import (
-	"myChatIM/controllers"
 	beego "github.com/beego/beego/v2/server/web"
+	"myChatIM/controllers"
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+	// 欢迎界面
+	beego.Router("/", &controllers.AppController{})
+	// 提交登录表单
+	beego.Router("/join", &controllers.AppController{}, "post:Join")
+
+	// Long Polling界面
+	beego.Router("/lp", &controllers.LongPollingController{}, "get:Join")
 }
